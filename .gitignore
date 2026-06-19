@@ -1,0 +1,23 @@
+# Model weights (large binaries)
+*.pt
+
+# Dataset images (large)
+yolo/images/
+DTM/
+
+# Dataset labels (large)
+yolo/labels/
+
+# Training run artifacts except results.csv
+runs/*/weights/
+runs/*/*.png
+runs/*/*.jpg
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Misc
+*.aux.xml
+*.tif
+*.tiff

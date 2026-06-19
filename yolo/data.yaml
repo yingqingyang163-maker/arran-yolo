@@ -1,0 +1,12 @@
+# YOLO data config - Arran archaeological features
+# 426 DTM hillshade tiles (500x500 px, 0.5m GSD)
+
+path: D:/claude code/document/data/arran/yolo
+train: images/train
+val: images/val
+
+nc: 3
+names:
+  0: roundhouse
+  1: shieling
+  2: smallcairn
