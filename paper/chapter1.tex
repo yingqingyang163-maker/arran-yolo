@@ -1,0 +1,293 @@
+% Chapter 1: Introduction and Research Objectives
+% Deep Learning for Archaeological Site Detection from LiDAR-Derived Imagery
+% A Multi-Version YOLO Consensus Approach
+
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{abstract}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% ── Metadata ──────────────────────────────────────────────────
+\title{\textbf{Deep Learning for Archaeological Site Detection from LiDAR-Derived Imagery: \\
+A Multi-Version YOLO Consensus Approach}\\[6pt]
+\large Chapter 1: Introduction and Research Objectives}
+
+\author{}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+% ======================================================================
+\section{Introduction}
+% ======================================================================
+
+The detection and documentation of archaeological sites at landscape scale remains one of the
+central challenges in archaeological prospection. Across Europe, and particularly in the upland
+regions of Scotland, thousands of archaeological features---ranging from prehistoric roundhouses
+and shielings to burial cairns and field systems---lie unrecorded beneath vegetation, peat, and
+modern land use \citep{banaszek2018only}. Systematic ground survey, while accurate, is
+prohibitively slow and expensive when applied across entire regions. The development of airborne
+remote sensing technologies over the past two decades has fundamentally altered this landscape,
+offering the first realistic prospect of comprehensive, large-scale archaeological mapping.
+
+Airborne Light Detection and Ranging (LiDAR) has emerged as the most transformative remote
+sensing technology for archaeological prospection in vegetated terrain. By emitting laser pulses
+that penetrate vegetation canopies and recording the reflected signal, LiDAR produces
+high-resolution digital terrain models (DTMs) that reveal micro-topographic features invisible to
+aerial photography or satellite imagery \citep{crutchley2010light}. When processed through
+specialised visualisation techniques---including the Local Relief Model \citep{hesse2010lidar},
+Sky-View Factor \citep{kokalj2011application}, and multiscale hillshading---LiDAR-derived
+imagery can expose subtle archaeological earthworks with remarkable clarity. These
+visualisations have led to the discovery of tens of thousands of previously unknown sites across
+Europe, fundamentally reshaping our understanding of past settlement patterns and landscape use.
+
+However, the interpretation of LiDAR-derived imagery for archaeological purposes remains
+overwhelmingly a manual, expert-driven process. Trained archaeologists visually inspect
+visualisations tile by tile, identifying and digitising features of interest. At national scales,
+this approach is unsustainable: Scotland alone contains approximately 80,000~km$^{2}$ of
+archaeologically sensitive terrain, the majority of which has never been systematically
+surveyed \citep{banaszek2018only}. The bottleneck is not data acquisition---LiDAR coverage is
+expanding rapidly through national programmes---but interpretation capacity. Manual
+interpretation introduces further limitations: inter-observer variability, fatigue-related
+omissions, and inconsistency in feature classification across different surveyors and projects.
+
+Deep learning, and specifically convolutional neural network (CNN)-based object detection,
+offers a promising solution to this interpretation bottleneck. Modern object detection
+architectures can learn to recognise complex visual patterns directly from labelled examples,
+potentially matching or exceeding human performance on well-defined visual recognition tasks
+while operating at computational speed. In archaeology, where target features exhibit
+characteristic morphological signatures in LiDAR visualisations, object detection models trained
+on annotated examples could automate the first-pass screening of large areas, allowing human
+experts to focus on verification and ambiguous cases---a paradigm that has proven highly
+effective in medical imaging, remote sensing, and industrial inspection \citep{kadhim2023critical}.
+
+Among the available object detection architectures, the You Only Look Once (YOLO) family has
+gained particular prominence due to its combination of speed, accuracy, and accessibility.
+First introduced by \citet{redmon2016you}, YOLO formulates object detection as a single
+regression problem, predicting bounding boxes and class probabilities directly from image
+pixels in one forward pass. Successive iterations---from YOLOv5 through YOLOv8, YOLOv11, and
+the most recent YOLOv12---have incorporated architectural advances including anchor-free
+detection heads, advanced feature pyramid networks, and attention mechanisms that improve
+performance on small and densely clustered objects \citep{jocher2023ultralytics}. These
+characteristics make YOLO particularly well-suited to archaeological detection tasks, where
+targets are often small relative to image dimensions and occur in clusters of varying density.
+
+This paper presents a systematic evaluation of multi-version YOLO fine-tuning for
+archaeological site detection in LiDAR-derived hillshade imagery, using the Isle of Arran
+(Scotland) as a test case. We introduce a consensus-based inference approach in which
+multiple random seeds of the same model architecture vote on the presence of each detected
+feature, requiring agreement from at least two of three seeds before a detection is
+retained. The study addresses three core questions: (1)~How effectively do modern YOLO
+variants (v8, v11, v12) detect archaeological features in hillshade imagery when fine-tuned
+with limited labelled data? (2)~Does multi-seed consensus voting improve the reliability of
+detections compared to single-model predictions? (3)~What are the practical implications of
+model version choice and consensus threshold for archaeological prospection workflows?
+
+% ======================================================================
+\section{Related Work}
+% ======================================================================
+
+\subsection{LiDAR Visualisation for Archaeological Prospection}
+
+The application of LiDAR to archaeology began in earnest in the early 2000s, with pioneering
+studies demonstrating its ability to penetrate forest canopy and reveal ground-surface
+topography at sub-metre resolution \citep{crutchley2010light}. The key innovation that
+unlocked the archaeological potential of LiDAR was the development of specialised
+visualisation techniques that emphasise subtle topographic features while suppressing
+large-scale terrain variation.
+
+\citet{hesse2010lidar} introduced the Local Relief Model (LRM), which decomposes a DTM into
+local (small-scale) and regional (large-scale) components through low-pass filtering,
+retaining only the local component to highlight archaeological features. This approach
+proved particularly effective for detecting low-relief earthworks such as field boundaries,
+trackways, and building platforms that are otherwise invisible in standard hillshade
+renderings. \citet{kokalj2011application} proposed the Sky-View Factor (SVF), a
+visualisation method borrowed from atmospheric sciences that computes the proportion of
+visible sky from each point on a surface. SVF exaggerates convex features (banks, cairns,
+walls) while suppressing concave features (pits, ditches), producing visually intuitive
+renderings that non-specialists can interpret. Subsequent research has extended this
+toolkit to include multiscale hillshading, openness, positive and negative openness, and
+principal component analysis of multiple visualisation layers \citep{doneus2008archaeological,
+devereux2008visualisation, mayoral2020automated}.
+
+These visualisation techniques have been instrumental in the discovery of archaeological
+sites at landscape scale. In Scotland, the National Lidar Programme has acquired data
+covering substantial portions of the country, and projects such as the Rapid Archaeological
+Mapping Programme (RAMP) have demonstrated the potential of LiDAR-based survey for
+identifying previously unrecorded sites in upland environments \citep{banaszek2018only}.
+Nevertheless, the interpretation process remains overwhelmingly manual, creating an urgent
+need for automated detection methods that can keep pace with the growing volume of
+available LiDAR data.
+
+\subsection{Deep Learning for Archaeological Detection}
+
+The application of deep learning to archaeological remote sensing has expanded rapidly since
+approximately 2018, driven by advances in computer vision, the availability of pre-trained
+models, and the growing volume of labelled archaeological data. Two comprehensive reviews
+provide a systematic overview of this emerging field.
+
+\citet{argyrou2022review} reviewed 135 studies applying artificial intelligence and remote
+sensing to archaeology, documenting a clear shift from traditional machine learning (random
+forests, support vector machines) towards deep learning architectures after 2018. They
+identified object detection as one of the most promising application areas, with
+convolutional neural networks achieving superior performance on tasks ranging from burial
+mound detection in satellite imagery to structure identification in drone-based
+orthophotography. However, they noted that the majority of studies remained at the proof-of-concept
+stage, applied to small geographic areas with limited ground-truth data, and that
+reproducibility and generalisability across different landscape contexts remained
+significant challenges.
+
+\citet{kadhim2023critical} provided a more technically focused review of deep learning
+approaches in archaeology, cataloguing the architectures, data sources, and evaluation
+metrics employed across 85 studies. They found that YOLO variants were among the most
+frequently used architectures, alongside Faster R-CNN and U-Net, with applications
+spanning site detection, artefact classification, and inscription recognition. Key
+limitations identified included the scarcity of large, publicly available annotated
+datasets; the computational cost of training; and the difficulty of transferring models
+between regions with different archaeological signatures and landscape characteristics.
+
+\subsection{Object Detection in LiDAR-Derived Imagery}
+
+Several recent studies have specifically addressed the challenge of detecting archaeological
+features in LiDAR-derived visualisations using deep learning, and these are most directly
+relevant to the present work.
+
+\citet{canedo2023uncovering} applied a data-centric AI approach to the detection of
+archaeological sites in airborne LiDAR data from the Iberian Peninsula. Rather than
+focusing on architectural innovation, they systematically investigated the impact of data
+quality, annotation strategy, and training set composition on detection performance. Their
+results demonstrated that careful data curation---including the selection of appropriate
+visualisation types, consistent annotation protocols, and balanced class representation---
+could yield performance improvements comparable to or exceeding those from architectural
+changes. This finding underscored a critical insight for archaeological applications: in a
+domain where labelled data is scarce and expensive to produce, data-centric strategies may
+offer higher return on investment than model-centric ones.
+
+Building on this work, \citet{canedo2025automated} developed a deep multimodal segmentation
+approach for the automated detection of hillforts in remote sensing imagery. Their method
+integrated multiple visualisation modalities---hillshade, slope, and local relief---as
+input channels to a segmentation network, enabling the model to learn complementary
+features from different representations of the same terrain. The multimodal approach
+outperformed single-modality baselines, particularly for features with ambiguous
+morphological signatures, demonstrating the value of sensor and visualisation fusion for
+archaeological detection.
+
+\citet{marccal2024evaluating} provided the most direct precedent for the present study by
+comparing Faster R-CNN and YOLOv8 for the detection of megalithic monuments in satellite
+imagery. Their results showed that YOLOv8 achieved competitive accuracy with significantly
+faster inference speed compared to Faster R-CNN, reinforcing YOLO's suitability for
+large-scale archaeological survey applications where processing speed is a practical
+constraint. However, their study was limited to a single YOLO version and did not explore
+the impact of random seed variation or consensus-based approaches.
+
+\subsection{The Multi-Seed Consensus Gap}
+
+A notable gap in the existing literature is the absence of systematic investigation into
+model reliability and prediction consistency. Deep learning models are inherently stochastic:
+different random initialisations (seeds) can lead to different learned weights, and
+consequently to different predictions on the same input. In high-stakes applications such
+as medical diagnosis and autonomous driving, ensemble and consensus techniques are
+routinely employed to mitigate this variability. In archaeology, however, the standard
+practice remains to train a single model and report its performance, without accounting for
+the variability introduced by the training process.
+
+This gap has practical consequences. An archaeological survey that relies on a single
+model's predictions risks both false positives (features incorrectly identified that
+require unnecessary ground verification) and false negatives (genuine features missed
+entirely). A consensus approach, requiring agreement across independently trained models
+before a detection is reported, offers a principled mechanism for controlling this
+trade-off. To our knowledge, no prior study has systematically evaluated multi-seed
+consensus voting for archaeological object detection, nor compared the behaviour of
+different YOLO generations under this paradigm.
+
+% ======================================================================
+\section{Research Objectives}
+% ======================================================================
+
+The overarching aim of this study is to develop and evaluate a reproducible, multi-version
+deep learning pipeline for archaeological site detection in LiDAR-derived hillshade
+imagery, with a specific focus on model reliability through consensus-based inference.
+The study is conducted on the Isle of Arran, Scotland---a region with a rich archaeological
+record spanning the Neolithic to the post-medieval period, and for which high-resolution
+LiDAR-derived visualisation data are available.
+
+The specific objectives are:
+
+\begin{enumerate}[leftmargin=*]
+
+\item \textbf{To fine-tune and compare three generations of YOLO nano-scale architectures}
+(YOLOv8n, YOLO11n, and YOLO12n) for the detection of three archaeological feature classes---
+roundhouses, shielings, and small cairns---in LiDAR-derived hillshade imagery. Each model
+version is trained under three different random seeds (0, 1, 2) to characterise the
+variability introduced by stochastic initialisation, producing nine independently trained
+models in total.
+
+\item \textbf{To implement and evaluate a multi-seed consensus voting mechanism} in which
+detections from the three seeds of each model version are compared, and only those
+predictions for which at least two of three seeds agree (Intersection-over-Union $\geq$ 0.5,
+same predicted class) are retained. This approach provides a quantitative estimate of
+prediction reliability that goes beyond single-model confidence scores.
+
+\item \textbf{To compare single-model, per-version consensus, and cross-version ensemble
+performance} using standard COCO-style mean Average Precision at 0.5 IoU threshold
+(mAP@0.5), supplemented by per-class precision and recall metrics, in order to characterise
+the trade-offs between detection sensitivity and false positive rate under different
+inference strategies.
+
+\item \textbf{To establish a reproducible, open-source pipeline}---encompassing data
+preparation, multi-seed training, consensus inference, and quantitative evaluation---that
+can be applied to other archaeological contexts and LiDAR datasets with minimal adaptation
+\citep{yingqingyang2026arran}.
+
+\end{enumerate}
+
+By pursuing these objectives, this study contributes to the growing body of evidence on
+deep learning applications in archaeology while addressing the critical, and currently
+underexplored, issue of prediction reliability through consensus mechanisms. The results
+provide practical guidance for archaeological practitioners considering the adoption of
+automated detection methods, and for researchers developing the next generation of
+archaeological prospection tools.
+
+% ======================================================================
+\section{Study Area and Data}
+% ======================================================================
+
+The Isle of Arran (55.58$^{\circ}$N, 5.21$^{\circ}$W) is located in the Firth of Clyde,
+off the west coast of Scotland. Often described as ``Scotland in miniature'' due to its
+diverse geology and landforms, Arran contains a concentration of archaeological sites
+spanning from the Neolithic to the post-medieval period, including chambered cairns,
+standing stones, roundhouses, shielings, and extensive field systems \citep{barber1997arran}.
+The island has been the subject of intensive archaeological survey since the 1970s, and its
+archaeological record is relatively well-documented, making it an ideal test case for
+evaluating automated detection methods against reliable ground truth.
+
+For this study, we use LiDAR-derived hillshade imagery of Arran processed with
+multidirectional illumination. The dataset comprises 424 image tiles of 500 $\times$
+500~pixels, manually annotated by archaeological specialists with bounding boxes for three
+feature classes: roundhouses (prehistoric circular stone-built dwellings, typically 8--15~m
+in diameter), shielings (seasonal upland pastoral structures, typically sub-rectangular,
+5--10~m across), and small cairns (clearance or burial cairns, 2--6~m in diameter, often
+appearing as subtle mounds in the hillshade). The dataset was split into 364 training
+images (85.8\%) and 60 validation images (14.2\%), with annotations in YOLO normalised
+format. Instance counts per class in the training set were 260 (roundhouse), 419 (shieling),
+and 489 (small cairn), reflecting the relative abundance of these feature types in the
+Arran landscape.
+
+% ======================================================================
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\end{document}
