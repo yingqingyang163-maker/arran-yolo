@@ -17,6 +17,17 @@ runs/*/*.jpg
 __pycache__/
 *.pyc
 
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+
 # Misc
 *.aux.xml
 *.tif
