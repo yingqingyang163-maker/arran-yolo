@@ -1,0 +1,266 @@
+{
+  "gpt-5.4": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.79,
+      "reason": "框内更像不规则小凹陷或地形噪声，缺乏清晰完整的圆形环状土埂，也不像微凸的小石冢。"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.9,
+      "reason": "目标位于边缘且形态残缺，像局部凹坑或噪声，没有明确圆屋环形边界，也非凸起鼓包。"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": false,
+      "confidence": 0.84,
+      "reason": "框内未见清楚的圆形闭合环或独立小丘，仅为弱起伏地表，不支持圆屋或小石冢判断。"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.81,
+      "reason": "可见的是模糊不规则起伏，缺少直径明确的环状坎线，也没有典型圆形微凸石冢。"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": false,
+      "confidence": 0.76,
+      "reason": "框内似为自然粗糙地形中的浅凹与纹理，未形成完整圆环；也不像孤立圆形鼓包。"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.68,
+      "reason": "框内可见近圆形的小型闭合隆起，中心略凸，较符合小石冢特征；不像方形畜栏或单纯凹坑。"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": false,
+      "confidence": 0.88,
+      "reason": "目标贴近图边且受文字遮挡，形态不完整，无法辨认出可靠的圆屋环状结构或小石冢鼓包。"
+    }
+  ],
+  "claude-sonnet-4-6": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": true,
+      "confidence": 0.82,
+      "reason": "框内可见清晰的圆形环状土埂，直径估计8~12米，低矮一圈坎轮廓完整，符合圆屋特征，置信度较高"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.25,
+      "reason": "框内特征模糊，仅见不完整弧线，地形起伏复杂，无法确认完整圆形环状结构，疑似地形噪声或残缺弧线"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": false,
+      "confidence": 0.2,
+      "reason": "框内区域位于图像边角，地形平坦无明显圆形结构，未见环状土埂或凸起土堆，特征不足"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.22,
+      "reason": "图中主要特征为线性沟渠或田埂，框内未见完整圆形环状结构，线性地物为主，不符合圆屋判断标准"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.88,
+      "reason": "框内可见清晰圆形环状土埂，轮廓完整，直径约8~10米，低矮圆圈坎特征明显，高置信度圆屋"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.75,
+      "reason": "框内可见圆形环状结构，有明显的圆圈轮廓，直径约10~15米，环壁可辨，符合圆屋特征，周边地形略复杂但主体清晰"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": false,
+      "confidence": 0.18,
+      "reason": "图像以大范围斜坡地形为主，框内区域位于边缘，无可辨认的完整圆形环状结构，地形坡度变化掩盖细节，不予接受"
+    }
+  ],
+  "claude-opus-4-8": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.6,
+      "reason": "框内为不规则亮斑，缺乏完整环状土埂，更像天然凹陷或地形噪声"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.75,
+      "reason": "框内地表平滑无明显环状结构，置信度低，无可辨识圆屋特征"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": false,
+      "confidence": 0.8,
+      "reason": "框落在图像边缘空白区，框内无任何环形土埂特征"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.7,
+      "reason": "框内位于地形坡折带，仅见线状沟纹，无闭合圆环"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.75,
+      "reason": "框内可见近圆形低矮环状土埂，直径合适，符合圆屋特征"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.6,
+      "reason": "框内有微弱的圆形环状轮廓，疑似圆屋但边缘不够清晰"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": false,
+      "confidence": 0.8,
+      "reason": "框内为高对比噪声及流水状纹理，无圆形闭合环状结构"
+    }
+  ],
+  "gpt-4o": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": true,
+      "confidence": 0.83,
+      "reason": "清晰的圆形环状土埂，符合圆屋特征。"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.31,
+      "reason": "特征不够明显，可能是地形噪声或天然凹陷。"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": false,
+      "confidence": 0.52,
+      "reason": "圆形特征不够清晰，可能是地形噪声或残缺弧线。"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.54,
+      "reason": "圆形特征较模糊，可能是地形噪声或天然凹陷。"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.9,
+      "reason": "明显的圆形环状土埂，符合圆屋特征。"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.57,
+      "reason": "圆形环状土埂较清晰，符合圆屋特征。"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": true,
+      "confidence": 0.65,
+      "reason": "清晰的圆形环状土埂，符合圆屋特征。"
+    }
+  ],
+  "qwen3-vl-plus": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": true,
+      "confidence": 0.83,
+      "reason": "清晰圆形环状土埂，直径约8米，低矮连续闭合，符合圆屋特征"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.31,
+      "reason": "形态模糊、不闭合，疑似局部扰动或噪声，缺乏明确环状结构"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": false,
+      "confidence": 0.52,
+      "reason": "仅见微弱弧线片段，未形成闭合环，属半截残缺弧线，不满足圆屋定义"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.54,
+      "reason": "方形框内为不规则浅凹陷，边缘破碎，疑似地形噪声或小坑，非环状凸起"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.9,
+      "reason": "典型圆形低环结构，直径约6米，轮廓完整，阴影显示外缘微隆，符合圆屋"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.57,
+      "reason": "可见近圆形闭合环，但部分被侵蚀；中心略凹，整体仍具圆屋基本形态，置信中等"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": false,
+      "confidence": 0.65,
+      "reason": "框内为方形浅凹陷，边缘规整似人为修整痕迹，更可能为近代小畜栏而非古圆屋"
+    }
+  ],
+  "glm-4.6v": [
+    {
+      "filename": "187035-639527_roundhouse.png",
+      "accept": true,
+      "confidence": 0.83,
+      "reason": "圆形环状土埂结构，符合圆屋特征"
+    },
+    {
+      "filename": "187260-639527_roundhouse.png",
+      "accept": false,
+      "confidence": 0.31,
+      "reason": "结构不清晰，不符合圆屋特征"
+    },
+    {
+      "filename": "187485-639302_roundhouse.png",
+      "accept": true,
+      "confidence": 0.52,
+      "reason": "圆形环状结构，符合圆屋特征"
+    },
+    {
+      "filename": "187485-639527_roundhouse.png",
+      "accept": true,
+      "confidence": 0.54,
+      "reason": "圆形环状结构，符合圆屋特征"
+    },
+    {
+      "filename": "187710-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.9,
+      "reason": "圆形环状土埂结构，符合圆屋特征"
+    },
+    {
+      "filename": "188160-638177_roundhouse.png",
+      "accept": true,
+      "confidence": 0.57,
+      "reason": "圆形环状结构，符合圆屋特征"
+    },
+    {
+      "filename": "188160-645452_roundhouse.png",
+      "accept": true,
+      "confidence": 0.65,
+      "reason": "圆形环状结构，符合圆屋特征"
+    }
+  ]
+}
